@@ -12,25 +12,25 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Http\Controllers\EventController;
 
-Route::get('/', function () {
-    $nome = 'luis';
-    $idade = 24;
-
-    $lista = [1,2,3,4,5];
-    $names = ['morrigan', 'gabriela', 'hades'];
-    /* a view rertona ['chave do array' $variavel]  */
-    return view('welcome',
-     ['nome' => $nome, 
-     'idade' => $idade,
-     'lista' => $lista,
-     'names' => $names]);
-});
+Route::get('/', [EventController::class, 'index']);
+Route::get('/events/create', [EventController::class, 'create'])->middleware('auth');
+Route::get('/events/{id}', [EventController::class, 'show']);
+Route::post('/events', [EventController::class, 'store']);
+Route::delete('/events/{id}', [EventController::class,'destroy'])->middleware('auth');
+Route::get('/events/edit/{id}', [EventController::class,'edit'])->middleware('auth');  
+Route::put('/events/update/{id}',[EventController::class, 'update'])->middleware('auth');
 
 Route::get('/contact', function () {
     return view('contact');
 });
 
-Route::get('/product', function () {
-    return view('product');
-});
+Route::get('/dashboard', [EventController::class, 'dashboard'])->middleware(('auth'));
+
+Route::post('/events/join/{id}', [EventController::class, 'joinEvent'])->middleware(('auth'));
+
+/* Route::middleware(['auth:sanctum','verified'])->get('/dashboard', function () {
+        return view('dashboard');
+})->name('dashboard');
+ */

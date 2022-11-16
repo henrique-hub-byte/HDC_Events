@@ -1,7 +1,10 @@
 @extends('layouts.main')
-@section('title', 'Produtcs')
+
+@section('title', 'Product')
 
 @section('content')
-<h1>tela de produtos </h1>
 
+    @if ($id != null)
+        <h1>Exbidindo produto id {{ $id }} </h1>
+    @endif
 @endsection

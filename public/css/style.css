@@ -32,6 +32,15 @@ header {
     border-color: #C28008;
 }
 
+.already-joined-msg {
+    margin: 15px 0;
+    color: #004085;
+    background-color: #cce5ff;
+    border: 1px solid #b8daff;
+    padding: 10px;
+    width: 275px;
+}
+
 .msg {
     background-color: #D4EDDA;
     color: #155724;

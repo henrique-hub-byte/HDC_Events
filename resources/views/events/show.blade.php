@@ -11,14 +11,18 @@
                 <h1>{{$event->title}}</h1>
 
                 <p class="event-city">{{$event->city}} </p>
-                <p class="events-partipants">x partipantes</p>
+                <p class="events-partipants">{{ count($event->users)}}</p>
                 <p class="event-owner">{{ $eventOwner['name']}}</p>
+                @if(!$hasUserJoined)
                 <form action="/events/join/{{ $event->id}}" method="POST">
                     @csrf
                     <a href="/events/join{{ $event->id }}" class="btn btn-primary" id="event-submit" onclick="event.preventDefault(); this.closest('form').submit();">
                     Confirmar presença
                     </a>
                 </form>
+                @else
+                <p id="alredy" class="already-joined-msg">Voceê já está participando desse evento!</p>
+                @endif
                 <h3>O evento conta com:</h3>
                 <ul class="items-list">
                     @foreach ($event->items as $item)
